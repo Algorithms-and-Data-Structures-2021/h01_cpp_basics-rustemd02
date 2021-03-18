@@ -5,10 +5,22 @@
 
 // 1. реализуйте функцию ...
 ResizeStorageStatus resize_storage(Book *&storage, int size, int new_capacity) {
-  // здесь мог бы быть ваш разносторонний и многогранный код ...
-  // Tip 1: проведите валидацию аргументов функции
-  // Tip 2: не забудьте высвободить ранее выделенную память под хранилище
-  return ResizeStorageStatus::SUCCESS;
+    // здесь мог бы быть ваш разносторонний и многогранный код ...
+    // Tip 1: проведите валидацию аргументов функции
+    // Tip 2: не забудьте высвободить ранее выделенную память под хранилище
+
+    if (*&storage == nullptr){
+        return ResizeStorageStatus::NULL_STORAGE;
+    }
+
+    if (new_capacity>size){
+        resize_storage(storage, size, new_capacity);
+        
+        return ResizeStorageStatus::SUCCESS;
+    } else {
+        return ResizeStorageStatus::INSUFFICIENT_CAPACITY;
+    }
+
 }
 
 // 2. реализуйте конструктор ...
@@ -17,12 +29,16 @@ BookStore::BookStore(const std::string &name) : name_{name} {
   if (name.empty()) {
     throw std::invalid_argument("BookStore::name must not be empty");
   }
+    name_ = name;
+    storage_capacity_ = 0;
+
 
   // здесь мог бы быть ваш сотрясающий землю и выделяющий память код ...
 }
 
 // 3. реализуйте деструктор ...
 BookStore::~BookStore() {
+
   // здесь мог бы быть ваш высвобождающий разум от негатива код ...
   // Tip 1: я свободен ..., словно память в куче: не забудьте обнулить указатель
 }
