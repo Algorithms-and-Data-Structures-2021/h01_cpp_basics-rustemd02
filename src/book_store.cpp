@@ -13,13 +13,15 @@ ResizeStorageStatus resize_storage(Book *&storage, int size, int new_capacity) {
         return ResizeStorageStatus::NULL_STORAGE;
     }
 
-    if (new_capacity>size){
+   /* if (new_capacity>size){
         resize_storage(storage, size, new_capacity);
-        
+
         return ResizeStorageStatus::SUCCESS;
     } else {
         return ResizeStorageStatus::INSUFFICIENT_CAPACITY;
-    }
+    }*/
+    return ResizeStorageStatus::SUCCESS;
+
 
 }
 
