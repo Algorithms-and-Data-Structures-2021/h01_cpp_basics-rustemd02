@@ -12,7 +12,7 @@ ResizeStorageStatus resize_storage(Book *&storage, int size, int new_capacity) {
     if (storage == nullptr) {
         return ResizeStorageStatus::NULL_STORAGE;
     }
-    if (size<0){
+    if (size < 0) {
         return ResizeStorageStatus::NEGATIVE_SIZE;
     }
 
@@ -60,9 +60,17 @@ void BookStore::AddBook(const Book &book) {
         // здесь мог бы быть ваш умопомрачительный код ...
         // Tip 1: используйте функцию resize_storage_internal, задав новый размер хранилища
         // Tip 2: не забудьте обработать статус вызова функции
+        if (resize_storage_internal(kCapacityCoefficient + storage_capacity_) != ResizeStorageStatus::SUCCESS) {
+            return;
+        }
+
     }
     // Tip 3: не забудьте добавить книгу в наше бездонное хранилище ...
+    storage_[storage_size_] = book;
+    storage_size_++;
+
 }
+
 
 // РЕАЛИЗОВАНО
 
